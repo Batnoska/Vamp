@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
+    public bool IsMoving => moveInput != Vector2.zero;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,5 +24,11 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void StopMovement()
+    {
+        moveInput = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
     }
 }

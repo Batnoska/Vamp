@@ -12,6 +12,8 @@ public class WeaponController : MonoBehaviour
     private float attackTimer;
     
     [SerializeField] float attackRate = 1f;
+    
+    public bool IsAttacking { get; private set; }
 
     void Start()
     {
@@ -26,8 +28,17 @@ public class WeaponController : MonoBehaviour
         {
             attackTimer = 0f;
 
+            IsAttacking = true;
+
             currentWeapon?.Attack(transform);
+            
+            Invoke(nameof(ResetAttack), .1f);
         }
+    }
+
+    void ResetAttack()
+    {
+        IsAttacking = false;
     }
 
     public void OnSwitchWeapon1(InputAction.CallbackContext context)

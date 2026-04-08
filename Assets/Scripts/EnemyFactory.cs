@@ -6,7 +6,7 @@ public static class EnemyFactory
     {
         GameObject enemyObj = GameObject.Instantiate(prefab);
 
-        Enemy enemy = enemyObj.GetComponent<Enemy>();
+        // Enemy enemy = enemyObj.GetComponent<Enemy>();
 
         // switch (type)
         // {
