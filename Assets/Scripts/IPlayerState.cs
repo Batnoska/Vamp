@@ -7,4 +7,6 @@ public interface IPlayerState
     void Update();
 
     void Exit();
-}
+
+    bool CanBeInterrupted { get; }
+    }

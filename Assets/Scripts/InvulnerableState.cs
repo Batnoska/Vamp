@@ -8,40 +8,50 @@ public class InvulnerableState : IPlayerState
 
     float duration = 2f;
 
+    float blinkTimer;
+    float blinkInterval = 0.1f;
+
     SpriteRenderer spriteRenderer;
+
+    public bool CanBeInterrupted => false;
 
     public void Enter(PlayerStateMachine player)
     {
         this.player = player;
 
-        Debug.Log("Enter InvulnerableState");
-
         spriteRenderer =
             player.GetComponent<SpriteRenderer>();
 
         timer = duration;
+        blinkTimer = 0f;
     }
 
     public void Update()
     {
         timer -= Time.deltaTime;
 
-        BlinkEffect();
+        blinkTimer -= Time.deltaTime;
+
+        if (blinkTimer <= 0f ) 
+        {
+            BlinkEffect();
+            blinkTimer = blinkInterval;
+        }
 
         if (timer <= 0)
         {
-            player.ChangeState(new IdleState());
+            if (player.movement.IsMoving) player.ChangeState(new MoveState());
+            else
+                player.ChangeState(new IdleState());
         }
     }
 
     void BlinkEffect()
     {
-        spriteRenderer.enabled =
-            !spriteRenderer.enabled;
+        Color color = spriteRenderer.color;
+        color.a = (color.a == 1f) ? 0.3f : 1f;
+        spriteRenderer.color = color;
     }
 
-    public void Exit()
-    {
-        spriteRenderer.enabled = true;
-    }
+    public void Exit() {}
 }

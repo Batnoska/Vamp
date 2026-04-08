@@ -24,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (stateMachine.currentState is InvulnerableState) return;
+
         health -= damage;
 
         stateMachine.ChangeState(

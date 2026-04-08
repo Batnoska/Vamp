@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    private IPlayerState currentState;
+    public IPlayerState currentState;
 
     public PlayerMovement movement;
 
@@ -34,6 +34,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     void HandleMovementState()
     {
+        if (!currentState.CanBeInterrupted) return;
+
         if (movement.IsMoving && !(currentState is MoveState))
         {
             ChangeState(new MoveState());
