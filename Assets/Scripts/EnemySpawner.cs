@@ -4,15 +4,13 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject goblinPrefab;
-    public GameObject orcPrefab;
-    public GameObject skeletonPrefab;
+    [SerializeField] EnemyFactorySO[] enemyFactories;
 
-    public Transform player;
+    [SerializeField] Transform player;
 
-    public float spawnInterval = 2f;
+    [SerializeField] float spawnInterval = 2f;
 
-    public float spawnDistance = 4f;
+    [SerializeField] float spawnDistance = 4f;
 
     private void Start()
     {
@@ -21,30 +19,18 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        EnemyType type = EnemyFactory.GetRandomType();
+        EnemyFactorySO factory = GetRandomFactory();
 
-        GameObject prefab = GetPrefab(type);
-
-        GameObject enemy = EnemyFactory.CreateEnemy(type, prefab);
+        GameObject enemy = factory.CreateEnemy();
 
         enemy.transform.position = GetSpawnPosition();
     }
 
-    GameObject GetPrefab(EnemyType type)
+    EnemyFactorySO GetRandomFactory()
     {
-        switch (type)
-        {
-            case EnemyType.Goblin:
-                return goblinPrefab;
-            
-            case EnemyType.Orc:
-                return orcPrefab;
-            
-            case EnemyType.Skeleton:
-                return skeletonPrefab;
-        }
+        int index = Random.Range(0, enemyFactories.Length);
 
-        return null;
+        return enemyFactories[index];
     }
 
     Vector3 GetSpawnPosition()

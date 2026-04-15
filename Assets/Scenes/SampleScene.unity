@@ -243,9 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2010ee0d59de1846a7f14b2d4c59b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  goblinPrefab: {fileID: 6548085715536200291, guid: 78e52d87c22dbd04b8b11ccacd6dbdde, type: 3}
-  orcPrefab: {fileID: 5142203937328492303, guid: fc7126fd88f8a6a49963b87df9b510ab, type: 3}
-  skeletonPrefab: {fileID: 25406279950501592, guid: 6266d854c8225db4fa2607705b911d2b, type: 3}
+  enemyFactories:
+  - {fileID: 11400000, guid: 6613f24eef15dea48a351d09c76a2cd2, type: 2}
+  - {fileID: 11400000, guid: 1c57375264e5d184c9d8da9fd43ab1a1, type: 2}
+  - {fileID: 11400000, guid: 1cca50af943dfa24ca6f31f2cb140e22, type: 2}
   player: {fileID: 878428660}
   spawnInterval: 2
   spawnDistance: 8

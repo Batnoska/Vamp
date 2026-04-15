@@ -4,5 +4,6 @@ public enum EnemyType
 {
     Goblin,
     Orc,
-    Skeleton
+    Skeleton,
+    Unknown
 }
