@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] EnemyFactorySO[] enemyFactories;
+    [SerializeField] EnemyFactorySO currentFactory;
 
     [SerializeField] Transform player;
 
@@ -19,24 +19,30 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        EnemyFactorySO factory = GetRandomFactory();
+        int random = Random.Range(0, 3);
 
-        GameObject enemy = factory.CreateEnemy();
+        GameObject enemy = random switch
+        {
+            0 => currentFactory.CreateGoblin(),
+            1 => currentFactory.CreateOrc(),
+            _ => currentFactory.CreateSkeleton()
+        };
 
         enemy.transform.position = GetSpawnPosition();
     }
-
-    EnemyFactorySO GetRandomFactory()
-    {
-        int index = Random.Range(0, enemyFactories.Length);
-
-        return enemyFactories[index];
-    }
+    
 
     Vector3 GetSpawnPosition()
     {
         Vector2 offset = Random.insideUnitCircle.normalized * spawnDistance;
 
         return player.position + (Vector3)offset;
+    }
+
+    public void SetFactory(EnemyFactorySO newFactory)
+    {
+        currentFactory = newFactory;
+        
+        Debug.Log("Cycle");
     }
 }

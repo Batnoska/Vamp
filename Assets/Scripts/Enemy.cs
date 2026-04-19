@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float _speed;
+    [SerializeField] private float _damage;
 
-    // Update is called once per frame
-    void Update()
+    public void SetStats(float speed, float damage)
     {
-        
+        this._speed = speed;
+        this._damage = damage;
     }
 }

@@ -2,7 +2,15 @@ using UnityEngine;
 
 public abstract class EnemyFactorySO : ScriptableObject
 {
-    public abstract GameObject CreateEnemy();
+    [SerializeField] protected GameObject goblinPrefab;
 
-    public abstract EnemyType Type { get; }
+    [SerializeField] protected GameObject orcPrefab;
+
+    [SerializeField] protected GameObject skeletonPrefab;
+
+    public abstract GameObject CreateGoblin();
+
+    public abstract GameObject CreateOrc();
+
+    public abstract GameObject CreateSkeleton();
 }
