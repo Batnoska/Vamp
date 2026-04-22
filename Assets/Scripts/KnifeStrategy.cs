@@ -4,7 +4,7 @@ public class KnifeStrategy : IWeaponStrategy
 {
     private GameObject slashPrefab;
 
-    private float offset = 1f;
+    private float offset = 1.5f;
 
     public KnifeStrategy(GameObject prefab)
     {

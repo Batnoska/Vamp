@@ -5,13 +5,16 @@ using UnityEngine;
 public class GameTimerUI : MonoBehaviour
 {
     [SerializeField]private TextMeshProUGUI timerText;
-    private void OnEnable()
-    {
 
-        GameTimer.Instance.OnTimeChanged += UpdateTimer;
+    private void Start()
+    {
+        if (GameTimer.Instance != null)
+        {
+            GameTimer.Instance.OnTimeChanged += UpdateTimer;
+        }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameTimer.Instance.OnTimeChanged -= UpdateTimer;
     }

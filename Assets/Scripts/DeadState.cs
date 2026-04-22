@@ -15,6 +15,8 @@ public class DeadState : IPlayerState
 
         player.movement.StopMovement();
 
+        player.movement.enabled = false;
+        
         player.weaponController.enabled = false;
 
 
