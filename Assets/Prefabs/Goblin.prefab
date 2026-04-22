@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 8166316896564964260}
   - component: {fileID: 7976462521494280841}
   - component: {fileID: 2363530859713914429}
+  - component: {fileID: 4391357592054897150}
   - component: {fileID: -6272915438970211952}
+  - component: {fileID: 6799944861630998490}
+  - component: {fileID: 2589082234226814291}
+  - component: {fileID: -4306118213562086448}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -139,6 +143,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &4391357592054897150
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548085715536200291}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &-6272915438970211952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +182,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d843e18bbb3fa41b4374fec1c2d9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  _speed: 0
+  _damage: 0
+  _health: 0
+--- !u!114 &6799944861630998490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548085715536200291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bccce131a783a48bae5fe3ff71eb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &2589082234226814291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548085715536200291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68197609e39f57c43a1b5c7361630ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &-4306118213562086448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548085715536200291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f032eb3be496f4b9ff43d21145ee33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFeedback
+  bloodParticles: {fileID: 3102275534859008661, guid: 1a19b19c41702a242ae9bd9afdb264e6, type: 3}
+  bloodPool: {fileID: 2992299986641693007, guid: 382449f70852eac47b412c8c84bffcc2, type: 3}

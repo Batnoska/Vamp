@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health = 5;
+    [Min(0)]public int health = 10;
+
+    public event Action<int> OnHealthChanged;
 
     PlayerStateMachine stateMachine;
 
@@ -12,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     {
         stateMachine =
             GetComponent<PlayerStateMachine>();
+        
+        OnHealthChanged?.Invoke(health);
     }
 
     private void Update()
@@ -27,6 +31,8 @@ public class PlayerHealth : MonoBehaviour
         if (stateMachine.currentState is InvulnerableState) return;
 
         health -= damage;
+        
+        OnHealthChanged?.Invoke(health);
 
         stateMachine.ChangeState(
             new InvulnerableState()

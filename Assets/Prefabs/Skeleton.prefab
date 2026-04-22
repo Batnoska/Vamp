@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 559747638642764273}
   - component: {fileID: 3401759191824572302}
   - component: {fileID: 1370271317102668016}
+  - component: {fileID: 1337864098532893083}
   - component: {fileID: -4596425114784272013}
+  - component: {fileID: -7859052434275632920}
+  - component: {fileID: -4739582219095690018}
+  - component: {fileID: 5203108154050908264}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -139,6 +143,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1337864098532893083
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25406279950501592}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &-4596425114784272013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +182,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d843e18bbb3fa41b4374fec1c2d9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  _speed: 0
+  _damage: 0
+  _health: 0
+--- !u!114 &-7859052434275632920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25406279950501592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bccce131a783a48bae5fe3ff71eb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &-4739582219095690018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25406279950501592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68197609e39f57c43a1b5c7361630ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &5203108154050908264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25406279950501592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f032eb3be496f4b9ff43d21145ee33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFeedback
+  bloodParticles: {fileID: 3102275534859008661, guid: 1a19b19c41702a242ae9bd9afdb264e6, type: 3}
+  bloodPool: {fileID: 2992299986641693007, guid: 382449f70852eac47b412c8c84bffcc2, type: 3}

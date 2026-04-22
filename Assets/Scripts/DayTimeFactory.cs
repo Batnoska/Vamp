@@ -9,7 +9,7 @@ public class DayTimeFactory : EnemyFactorySO
 
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
 
-        enemyComponent.SetStats(speed: 2f, damage: 5f);
+        enemyComponent.SetStats(speed: 2f, damage: 4f, health: 3f);
 
         return enemy;
     }
@@ -20,7 +20,7 @@ public class DayTimeFactory : EnemyFactorySO
 
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
 
-        enemyComponent.SetStats(speed: 1.2f, damage: 10f);
+        enemyComponent.SetStats(speed: 1.2f, damage: 7f, health: 6f);
 
         return enemy;
     }
@@ -31,7 +31,7 @@ public class DayTimeFactory : EnemyFactorySO
 
         Enemy enemyComponent = enemy.GetComponent<Enemy>();
 
-        enemyComponent.SetStats(speed: 2.5f, damage: 4f);
+        enemyComponent.SetStats(speed: 2.5f, damage: 2f, health: 2f);
 
         return enemy;
     }

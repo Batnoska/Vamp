@@ -2,21 +2,27 @@ using UnityEngine;
 
 public class KnifeStrategy : IWeaponStrategy
 {
-    private GameObject projectilePrefab;
+    private GameObject slashPrefab;
+
+    private float offset = 1f;
 
     public KnifeStrategy(GameObject prefab)
     {
-        projectilePrefab = prefab;
+        slashPrefab = prefab;
     }
 
     public void Attack(Transform origin)
     {
-        GameObject projectile = Object.Instantiate(
-            projectilePrefab,
-            origin.position,
-            Quaternion.identity
-        );
+        float direction = origin.GetComponent<SpriteRenderer>().flipX ? -1 : 1;
 
-        projectile.transform.right = origin.right;
+        Vector3 spawnPosition = origin.position + Vector3.right * (direction * offset);
+
+        Quaternion rotation = direction == 1 ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
+        
+        GameObject slash = Object.Instantiate(
+            slashPrefab,
+            spawnPosition,
+            rotation
+        );
     }
 }

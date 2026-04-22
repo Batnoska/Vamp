@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +12,22 @@ public class DayNightManager : MonoBehaviour
 
     bool isNight;
 
-    void Update()
+    // void Update()
+    // {
+    //     if (Keyboard.current.kKey.wasPressedThisFrame)
+    //     {
+    //         ToggleDayNight();
+    //     }
+    // }
+
+    private void OnEnable()
     {
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-        {
-            ToggleDayNight();
-        }
+        GameTimer.Instance.OnNightStarted += ToggleDayNight;
+    }
+
+    private void OnDisable()
+    {
+        GameTimer.Instance.OnNightStarted -= ToggleDayNight;
     }
 
     void ToggleDayNight()
