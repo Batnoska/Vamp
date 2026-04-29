@@ -6,14 +6,11 @@ public class HitData
 
     public float knockbackForce;
 
-    public Vector2 hitDirection;
 
-    public HitData(int damage, float knockbackForce, Vector2 direction)
+    public HitData(int damage, float knockbackForce)
     {
         this.damage = damage;
 
         this.knockbackForce = knockbackForce;
-        
-        this.hitDirection = direction;
     }
 }

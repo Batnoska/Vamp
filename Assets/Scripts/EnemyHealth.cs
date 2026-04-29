@@ -13,11 +13,11 @@ public class EnemyHealth : MonoBehaviour
         feedback = GetComponent<EnemyHitFeedback>();
     }
 
-    public void TakeDamage(HitData hit)
+    public void TakeDamage(HitData hit, HitContext context)
     {
         enemy._health -= hit.damage;
 
-        feedback.PlayHitFeedback(hit);
+        feedback.PlayHitFeedback(hit, context);
 
         if (enemy._health <= 0)
         {
@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         feedback.PlayDeathFeedback();
-        
-        Destroy(gameObject);
+
+        GetComponent<Enemy>().ReturnToPool();
     }
 }

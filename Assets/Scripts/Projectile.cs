@@ -11,9 +11,28 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private float knockbackForce = 4f;
 
-    private void Start()
+    private HitData hitData;
+
+    private GameObject originPrefab;
+
+    private void Awake()
     {
-        Destroy(gameObject, lifetime);
+        hitData = new HitData(damage, knockbackForce);
+    }
+
+    public void SetOrigin(GameObject prefab)
+    {
+        originPrefab = prefab;
+    }
+
+    private void OnEnable()
+    {
+        Invoke(nameof(ReturnToPool), lifetime);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 
     private void Update()
@@ -29,14 +48,15 @@ public class Projectile : MonoBehaviour
         
         Vector2 direction = (other.transform.position - transform.position).normalized;
 
-        HitData hit = new HitData(
-            damage,
-            knockbackForce,
-            direction
-        );
+        HitContext context = new HitContext(direction);
         
-        enemy.TakeDamage(hit);
-        
-        Destroy(gameObject);
+        enemy.TakeDamage(hitData, context);
+
+        ReturnToPool();
+    }
+
+    void ReturnToPool()
+    {
+        PoolManage.Instance.Release(gameObject, originPrefab);
     }
 }

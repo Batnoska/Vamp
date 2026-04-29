@@ -13,6 +13,12 @@ public class NightTimeFactory : EnemyFactorySO
 
         return enemy;
     }
+    
+    public override void ConfigureGoblin(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetStats(3.5f, 6f, 5f);
+    }
 
     public override GameObject CreateOrc()
     {
@@ -24,6 +30,12 @@ public class NightTimeFactory : EnemyFactorySO
 
         return enemy;
     }
+    
+    public override void ConfigureOrc(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetStats(2.2f, 8f, 9f);
+    }
 
     public override GameObject CreateSkeleton()
     {
@@ -34,5 +46,11 @@ public class NightTimeFactory : EnemyFactorySO
         enemyComponent.SetStats(speed: 4f, damage: 4f, health: 3f);
 
         return enemy;
+    }
+    
+    public override void ConfigureSkeleton(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetStats(4f, 4f, 3f);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
@@ -14,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        
         InvokeRepeating(nameof(SpawnEnemy), 1f, spawnInterval);
     }
 
@@ -21,15 +23,44 @@ public class EnemySpawner : MonoBehaviour
     {
         int random = Random.Range(0, 3);
 
-        GameObject enemy = random switch
+        GameObject prefab;
+        GameObject enemy;
+
+        switch (random)
         {
-            0 => currentFactory.CreateGoblin(),
-            1 => currentFactory.CreateOrc(),
-            _ => currentFactory.CreateSkeleton()
-        };
+            case 0:
+                prefab = currentFactory.GetGoblinPrefab();
+                enemy = PoolManage.Instance.Get(prefab);
+                currentFactory.ConfigureGoblin(enemy);
+                break;
+            case 1:
+                prefab = currentFactory.GetOrcPrefab();
+                enemy = PoolManage.Instance.Get(prefab);
+                currentFactory.ConfigureOrc(enemy);
+                break;
+
+            default:
+                prefab = currentFactory.GetSkeletonPrefab();
+                enemy = PoolManage.Instance.Get(prefab);
+                currentFactory.ConfigureSkeleton(enemy);
+                break;
+        }
 
         enemy.transform.position = GetSpawnPosition();
-        enemy.GetComponent<Enemy>().SetTarget(player);
+
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetTarget(player);
+        e.SetOrigin(prefab);
+
+        // GameObject enemy = random switch
+        // {
+        //     0 => currentFactory.CreateGoblin(),
+        //     1 => currentFactory.CreateOrc(),
+        //     _ => currentFactory.CreateSkeleton()
+        // };
+        //
+        // enemy.transform.position = GetSpawnPosition();
+        // enemy.GetComponent<Enemy>().SetTarget(player);
     }
     
 

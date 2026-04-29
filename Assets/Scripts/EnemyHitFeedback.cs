@@ -26,24 +26,24 @@ public class EnemyHitFeedback : MonoBehaviour
             spriteRenderer.color;
     }
     
-    public void PlayHitFeedback(HitData hit)
+    public void PlayHitFeedback(HitData hit, HitContext context)
     {
-        ApplyKnockback(hit);
+        ApplyKnockback(hit, context);
         
-        SpawnBloodParticles(hit);
+        SpawnBloodParticles(hit, context);
 
         StartCoroutine(HitFlash());
 
     }
     
-    void ApplyKnockback(HitData hit)
+    void ApplyKnockback(HitData hit, HitContext context)
     {
         Enemy enemy = GetComponent<Enemy>();
         
         enemy.ApplyKnockbackStun(0.3f);
         
         rb.AddForce(
-            hit.hitDirection *
+            context.direction *
             hit.knockbackForce,
             ForceMode2D.Impulse
         );
@@ -58,12 +58,12 @@ public class EnemyHitFeedback : MonoBehaviour
         spriteRenderer.color = originalColor;
     }
     
-    void SpawnBloodParticles(HitData hit)
+    void SpawnBloodParticles(HitData hit, HitContext context)
     {
         if (bloodParticles == null) return;
 
         bloodParticles.transform.right =
-            hit.hitDirection;
+            context.direction;
 
         Instantiate(
             bloodParticles,
@@ -74,6 +74,8 @@ public class EnemyHitFeedback : MonoBehaviour
     
     public void PlayDeathFeedback()
     {
+        spriteRenderer.color = originalColor;
+        
         Instantiate(
             bloodPool,
             transform.position,

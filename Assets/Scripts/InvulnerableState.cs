@@ -13,6 +13,9 @@ public class InvulnerableState : IPlayerState
 
     SpriteRenderer spriteRenderer;
 
+    private bool isTransparent;
+    private Color originalColor;
+
     public bool CanBeInterrupted => false;
 
     public void Enter(PlayerStateMachine player)
@@ -24,6 +27,9 @@ public class InvulnerableState : IPlayerState
 
         timer = duration;
         blinkTimer = 0f;
+
+        originalColor = spriteRenderer.color;
+        isTransparent = false;
     }
 
     public void Update()
@@ -48,10 +54,15 @@ public class InvulnerableState : IPlayerState
 
     void BlinkEffect()
     {
-        Color color = spriteRenderer.color;
-        color.a = (color.a == 1f) ? 0.3f : 1f;
+        isTransparent = !isTransparent;
+        
+        Color color = originalColor;
+        color.a = isTransparent ? 0.3f : 1f;
         spriteRenderer.color = color;
     }
 
-    public void Exit() {}
+    public void Exit()
+    {
+        spriteRenderer.color = originalColor;
+    }
 }

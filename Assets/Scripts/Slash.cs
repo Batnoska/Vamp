@@ -9,9 +9,28 @@ public class Slash : MonoBehaviour
 
     [SerializeField] private float knockbackForce = 7f;
 
-    private void Start()
+    private HitData hitData;
+
+    private GameObject originPrefab;
+
+    private void Awake()
     {
-        Destroy(gameObject, lifetime);
+        hitData = new HitData(damage, knockbackForce);
+    }
+
+    public void SetOrigin(GameObject prefab)
+    {
+        originPrefab = prefab;
+    }
+
+    private void OnEnable()
+    {
+        Invoke(nameof(ReturnToPool), lifetime);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -22,12 +41,13 @@ public class Slash : MonoBehaviour
 
         Vector2 direction = (other.transform.position - transform.position).normalized;
 
-        HitData hit = new HitData(
-            damage,
-            knockbackForce,
-            direction
-        );
+        HitContext context = new HitContext(direction);
         
-        enemy.TakeDamage(hit);
+        enemy.TakeDamage(hitData, context);
+    }
+
+    void ReturnToPool()
+    {
+        PoolManage.Instance.Release(gameObject, originPrefab);
     }
 }

@@ -18,11 +18,12 @@ public class KnifeStrategy : IWeaponStrategy
         Vector3 spawnPosition = origin.position + Vector3.right * (direction * offset);
 
         Quaternion rotation = direction == 1 ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
-        
-        GameObject slash = Object.Instantiate(
-            slashPrefab,
-            spawnPosition,
-            rotation
-        );
+
+        GameObject slash = PoolManage.Instance.Get(slashPrefab);
+
+        slash.transform.position = spawnPosition;
+        slash.transform.rotation = rotation;
+
+        slash.GetComponent<Slash>()?.SetOrigin(slashPrefab);
     }
 }

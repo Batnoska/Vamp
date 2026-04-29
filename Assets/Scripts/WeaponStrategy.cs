@@ -31,11 +31,12 @@ public class WeaponStrategy : IWeaponStrategy
             
             Quaternion rotation = Quaternion.Euler(0, direction == 1 ? 0 : 180, angle * direction);
 
-            Object.Instantiate(
-                projectilePrefab,
-                spawnPosition,
-                rotation
-            );
+            GameObject bullet = PoolManage.Instance.Get(projectilePrefab);
+
+            bullet.transform.position = spawnPosition;
+            bullet.transform.rotation = rotation;
+
+            bullet.GetComponent<Projectile>()?.SetOrigin(projectilePrefab);
         }
     }
 }

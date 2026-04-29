@@ -14,6 +14,12 @@ public class DayTimeFactory : EnemyFactorySO
         return enemy;
     }
 
+    public override void ConfigureGoblin(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetStats(2f, 4f, 3f);
+    }
+    
     public override GameObject CreateOrc()
     {
         GameObject enemy = Instantiate(orcPrefab);
@@ -23,6 +29,12 @@ public class DayTimeFactory : EnemyFactorySO
         enemyComponent.SetStats(speed: 1.2f, damage: 7f, health: 6f);
 
         return enemy;
+    }
+    
+    public override void ConfigureOrc(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetStats(1.2f, 7f, 6f);
     }
 
     public override GameObject CreateSkeleton()
@@ -34,5 +46,11 @@ public class DayTimeFactory : EnemyFactorySO
         enemyComponent.SetStats(speed: 2.5f, damage: 2f, health: 2f);
 
         return enemy;
+    }
+    
+    public override void ConfigureSkeleton(GameObject enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+        e.SetStats(2.5f, 2f, 2f);
     }
 }
