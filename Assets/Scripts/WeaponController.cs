@@ -64,6 +64,6 @@ public class WeaponController : MonoBehaviour
     public void EquipWeapon()
     {
         currentWeapon =
-            new WeaponStrategy(weaponPrefab);
+            new ShotgunStrategy(weaponPrefab);
     }
 }

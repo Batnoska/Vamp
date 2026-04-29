@@ -28,7 +28,6 @@ public class GameTimer : MonoBehaviour
     {
         timer += Time.deltaTime;
         
-        Debug.Log(timer);
 
         OnTimeChanged?.Invoke(timer);
 

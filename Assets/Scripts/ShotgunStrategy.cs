@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponStrategy : IWeaponStrategy
+public class ShotgunStrategy : IWeaponStrategy
 {
     private GameObject projectilePrefab;
 
@@ -8,7 +8,7 @@ public class WeaponStrategy : IWeaponStrategy
     private float spreadAngle = 25f;
     private float offset = 1f;
 
-    public WeaponStrategy(GameObject prefab)
+    public ShotgunStrategy(GameObject prefab)
     {
         projectilePrefab = prefab;
     }

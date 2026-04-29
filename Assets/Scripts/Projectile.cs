@@ -50,9 +50,12 @@ public class Projectile : MonoBehaviour
 
         HitContext context = new HitContext(direction);
         
-        enemy.TakeDamage(hitData, context);
+        if (enemy.isAlive)
+        {
+            enemy.TakeDamage(hitData, context);
 
-        ReturnToPool();
+            ReturnToPool();
+        }
     }
 
     void ReturnToPool()

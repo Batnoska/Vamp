@@ -4,9 +4,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Min(0)]public int health = 10;
+    public int health = 10;
 
     public event Action<int> OnHealthChanged;
+
+    public bool IsDead => health <= 0;
 
     PlayerStateMachine stateMachine;
 
@@ -28,11 +30,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (stateMachine.currentState is InvulnerableState) return;
+        if (stateMachine.currentState is InvulnerableState || IsDead) return;
 
         health -= damage;
         
-        OnHealthChanged?.Invoke(health);
+        
 
         stateMachine.ChangeState(
             new InvulnerableState()
@@ -44,5 +46,7 @@ public class PlayerHealth : MonoBehaviour
                 new DeadState()
             );
         }
+
+        OnHealthChanged?.Invoke(health);
     }
 }

@@ -19,6 +19,7 @@ public class DeadState : IPlayerState
         
         player.weaponController.enabled = false;
 
+        player.GetComponent<PlayerHealth>().health = 0;
 
         player.GetComponent<SpriteRenderer>().enabled = false;
     }

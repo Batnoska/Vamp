@@ -7,6 +7,13 @@ public class EnemyHealth : MonoBehaviour
 
     private EnemyHitFeedback feedback;
 
+    public bool isAlive;
+
+    private void OnEnable()
+    {
+        isAlive = true;
+    }
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -27,6 +34,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        isAlive = false;
+
         feedback.PlayDeathFeedback();
 
         GetComponent<Enemy>().ReturnToPool();
