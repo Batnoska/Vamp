@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public int health = 10;
 
+    public int maxHealth = 10;
+
     public event Action<int> OnHealthChanged;
 
     public bool IsDead => health <= 0;
@@ -46,6 +48,30 @@ public class PlayerHealth : MonoBehaviour
                 new DeadState()
             );
         }
+
+        OnHealthChanged?.Invoke(health);
+    }
+
+    public void Heal(int healAmount)
+    {
+        health += healAmount;
+
+        if (health > maxHealth)
+            health = maxHealth;
+
+        OnHealthChanged?.Invoke(health);
+    }
+
+    public void SetHP(int newValue)
+    {
+        health = newValue;
+
+        // TODO: implementar muerte
+        if (health <= 0)
+            Debug.Log("Dead");
+
+        if (health > maxHealth)
+            health = maxHealth;
 
         OnHealthChanged?.Invoke(health);
     }
