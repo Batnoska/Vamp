@@ -2383,6 +2383,18 @@ PrefabInstance:
       value: pasto
       objectReference: {fileID: 0}
     - target: {fileID: 5570425397214530123, guid: 9c54cc568ea3f8e4fa517166e738f525, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.384342
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570425397214530123, guid: 9c54cc568ea3f8e4fa517166e738f525, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.384342
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570425397214530123, guid: 9c54cc568ea3f8e4fa517166e738f525, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9.384342
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570425397214530123, guid: 9c54cc568ea3f8e4fa517166e738f525, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.26
       objectReference: {fileID: 0}
