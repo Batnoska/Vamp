@@ -209,6 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68197609e39f57c43a1b5c7361630ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  enemyDeathChannel: {fileID: 11400000, guid: 7de7e916282305c4da8e205c721234db, type: 2}
+  isAlive: 0
 --- !u!114 &5203108154050908264
 MonoBehaviour:
   m_ObjectHideFlags: 0

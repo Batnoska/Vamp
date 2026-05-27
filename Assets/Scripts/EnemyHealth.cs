@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] private EnemyDeathEventChannelSO enemyDeathChannel;
+    
     private Enemy enemy;
 
     private EnemyHitFeedback feedback;
@@ -37,6 +39,8 @@ public class EnemyHealth : MonoBehaviour
         isAlive = false;
 
         feedback.PlayDeathFeedback();
+        
+        enemyDeathChannel.RaiseEvent(enemy);
 
         GetComponent<Enemy>().ReturnToPool();
     }

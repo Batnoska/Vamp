@@ -7,11 +7,27 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] EnemyFactorySO currentFactory;
 
+    [SerializeField] private EnemyDeathEventChannelSO enemyDeathChannel;
+
     [SerializeField] Transform player;
 
     [SerializeField] float spawnInterval = 2f;
 
     [SerializeField] float spawnDistance = 4f;
+
+    [SerializeField] private int maxEnemies = 10;
+
+    private int currentEnemies;
+
+    private void OnEnable()
+    {
+        enemyDeathChannel.OnEventRaised += OnEnemyDeath;
+    }
+
+    private void OnDisable()
+    {
+        enemyDeathChannel.OnEventRaised -= OnEnemyDeath;
+    }
 
     private void Start()
     {
@@ -21,6 +37,8 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
+        if (currentEnemies >= maxEnemies) return;
+        
         int random = Random.Range(0, 3);
 
         GameObject prefab;
@@ -51,16 +69,7 @@ public class EnemySpawner : MonoBehaviour
         Enemy e = enemy.GetComponent<Enemy>();
         e.SetTarget(player);
         e.SetOrigin(prefab);
-
-        // GameObject enemy = random switch
-        // {
-        //     0 => currentFactory.CreateGoblin(),
-        //     1 => currentFactory.CreateOrc(),
-        //     _ => currentFactory.CreateSkeleton()
-        // };
-        //
-        // enemy.transform.position = GetSpawnPosition();
-        // enemy.GetComponent<Enemy>().SetTarget(player);
+        currentEnemies++;
     }
     
 
@@ -76,5 +85,12 @@ public class EnemySpawner : MonoBehaviour
         currentFactory = newFactory;
         
         Debug.Log("Cycle");
+    }
+
+    void OnEnemyDeath(Enemy enemy)
+    {
+        currentEnemies--;
+        
+        Debug.Log("Enemy died. Alive: " + currentEnemies);
     }
 }

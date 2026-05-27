@@ -1827,9 +1827,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   currentFactory: {fileID: 11400000, guid: 09ef76a221136514e82b9d7f0ff4368e, type: 2}
+  enemyDeathChannel: {fileID: 11400000, guid: 7de7e916282305c4da8e205c721234db, type: 2}
   player: {fileID: 878428660}
   spawnInterval: 2
   spawnDistance: 8
+  maxEnemies: 10
 --- !u!4 &236205273
 Transform:
   m_ObjectHideFlags: 0
