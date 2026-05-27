@@ -9,6 +9,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerMovement movement;
+    private PlayerStateMachine playerStateMachine;
 
     private bool canDash = true;
 
@@ -16,35 +17,34 @@ public class PlayerAbilities : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<PlayerMovement>();
+        playerStateMachine = GetComponent<PlayerStateMachine>();
     }
 
     public void Dash()
     {
         if (!canDash) return;
 
-        StartCoroutine(DashRoutine());
-    }
-
-    IEnumerator DashRoutine()
-    {
-        canDash = false;
-
         Vector2 direction = movement.MoveInput;
 
         if (direction == Vector2.zero)
         {
-            direction = transform.right;
+            direction = Vector2.right * movement.FacingDirection;
         }
+        
+        playerStateMachine.ChangeState(
+            new DashState(
+            direction,
+            dashForce,
+            dashDuration
+            )
+            );
 
-        movement.CanMove = false;
+        StartCoroutine(DashCooldown());
+    }
 
-        rb.linearVelocity = direction.normalized * dashForce;
-
-        yield return new WaitForSeconds(dashDuration);
-
-        rb.linearVelocity = Vector2.zero;
-
-        movement.CanMove = true;
+    IEnumerator DashCooldown()
+    {
+        canDash = false;
 
         yield return new WaitForSeconds(dashCooldown);
 

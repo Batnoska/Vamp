@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 MoveInput => moveInput;
 
     public bool IsMoving => moveInput != Vector2.zero;
+    public float FacingDirection => spriteRenderer.flipX ? 1f : 1f;
 
     public bool CanMove = true;
 
