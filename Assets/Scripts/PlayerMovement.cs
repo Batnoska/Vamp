@@ -10,7 +10,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private SpriteRenderer spriteRenderer;
 
+    public Vector2 MoveInput => moveInput;
+
     public bool IsMoving => moveInput != Vector2.zero;
+
+    public bool CanMove = true;
 
     private void Start()
     {
@@ -20,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!CanMove) return;
+        
         rb.linearVelocity = moveInput * speed;
 
         HandleFlip();

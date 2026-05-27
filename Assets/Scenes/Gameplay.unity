@@ -6203,6 +6203,8 @@ GameObject:
   - component: {fileID: 878428664}
   - component: {fileID: 878428665}
   - component: {fileID: 878428666}
+  - component: {fileID: 878428668}
+  - component: {fileID: 878428667}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6358,6 +6360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   speed: 5
+  CanMove: 1
 --- !u!114 &878428662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6503,6 +6506,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6c4d0571-fab5-4c8f-970b-10e383d4a223
     m_ActionName: 'Player/SwitchWeapon2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 878428667}
+        m_TargetAssemblyTypeName: AbilityInvoker, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1347b9ba-9c8d-4623-bf86-e3a68c0095f6
+    m_ActionName: 'Player/Dash[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -6575,6 +6594,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d700d022b86cbd40a194cebe368a5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+--- !u!114 &878428667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878428656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0341c1700eb86c4ab1fb6615d209614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityInvoker
+  abilities: {fileID: 878428668}
+--- !u!114 &878428668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878428656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cac9c0a000134a4dbbd383955247de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilities
+  dashForce: 15
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!4 &879285301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5570425397214530123, guid: 9c54cc568ea3f8e4fa517166e738f525, type: 3}
