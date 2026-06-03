@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6799944861630998490}
   - component: {fileID: 2589082234226814291}
   - component: {fileID: -4306118213562086448}
+  - component: {fileID: -8263238486828625414}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -225,3 +226,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFeedback
   bloodParticles: {fileID: 3102275534859008661, guid: 1a19b19c41702a242ae9bd9afdb264e6, type: 3}
   bloodPool: {fileID: 2992299986641693007, guid: 382449f70852eac47b412c8c84bffcc2, type: 3}
+--- !u!114 &-8263238486828625414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548085715536200291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ef72163068c1b46921d9d25dffcc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatFacade
+  enemyDeathChannel: {fileID: 11400000, guid: 7de7e916282305c4da8e205c721234db, type: 2}

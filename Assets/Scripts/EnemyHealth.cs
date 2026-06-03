@@ -8,8 +8,19 @@ public class EnemyHealth : MonoBehaviour
     private Enemy enemy;
 
     private EnemyHitFeedback feedback;
+    private CombatFacade combatFacade;
 
     public bool isAlive;
+
+    public bool IsDead()
+    {
+        return enemy._health <= 0;
+    }
+
+    public void SetDead()
+    {
+        isAlive = false;
+    }
 
     private void OnEnable()
     {
@@ -20,28 +31,16 @@ public class EnemyHealth : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         feedback = GetComponent<EnemyHitFeedback>();
+        combatFacade = GetComponent<CombatFacade>();
     }
 
     public void TakeDamage(HitData hit, HitContext context)
     {
-        enemy._health -= hit.damage;
-
-        feedback.PlayHitFeedback(hit, context);
-
-        if (enemy._health <= 0)
-        {
-            Die();
-        }
+        combatFacade.DamageEnemy(hit, context);
     }
 
-    void Die()
+    public void ApplyDamage(HitData hit)
     {
-        isAlive = false;
-
-        feedback.PlayDeathFeedback();
-        
-        enemyDeathChannel.RaiseEvent(enemy);
-
-        GetComponent<Enemy>().ReturnToPool();
+        enemy._health -= hit.damage;
     }
 }
