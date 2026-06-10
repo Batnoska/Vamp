@@ -52,8 +52,10 @@ public class Projectile : MonoBehaviour
         
         if (enemy.isAlive)
         {
-            enemy.TakeDamage(hitData, context);
+            IHitEffect hitEffect = new FireDecorator(new BasicHitEffect(hitData));
 
+            hitEffect.Apply(enemy, context);
+            
             ReturnToPool();
         }
     }
