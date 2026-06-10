@@ -13,11 +13,19 @@ public class Projectile : MonoBehaviour
 
     private HitData hitData;
 
+    private bool hasFireEffect;
+
     private GameObject originPrefab;
 
     private void Awake()
     {
         hitData = new HitData(damage, knockbackForce);
+    }
+
+
+    public void SetFireEffect(bool value)
+    {
+        hasFireEffect = value;
     }
 
     public void SetOrigin(GameObject prefab)
@@ -52,7 +60,9 @@ public class Projectile : MonoBehaviour
         
         if (enemy.isAlive)
         {
-            IHitEffect hitEffect = new FireDecorator(new BasicHitEffect(hitData));
+            IHitEffect hitEffect = new BasicHitEffect(hitData);
+
+            if (hasFireEffect) hitEffect = new FireDecorator(hitEffect);
 
             hitEffect.Apply(enemy, context);
             

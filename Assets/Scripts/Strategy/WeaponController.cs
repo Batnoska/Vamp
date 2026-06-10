@@ -15,8 +15,21 @@ public class WeaponController : MonoBehaviour
     
     public bool IsAttacking { get; private set; }
 
+    KnifeStrategy knifeStrategy;
+    ShotgunStrategy shotgunStrategy;
+
+    public bool HasFireShot { get; private set; }
+
+    public void EnableFireShot()
+    {
+        HasFireShot = true;
+    }
+
     void Start()
     {
+        knifeStrategy = new KnifeStrategy(knifePrefab);
+        shotgunStrategy = new ShotgunStrategy(weaponPrefab, this);
+
         EquipKnife();
     }
 
@@ -57,13 +70,11 @@ public class WeaponController : MonoBehaviour
 
     public void EquipKnife()
     {
-        currentWeapon =
-            new KnifeStrategy(knifePrefab);
+        currentWeapon = knifeStrategy;
     }
 
     public void EquipWeapon()
     {
-        currentWeapon =
-            new ShotgunStrategy(weaponPrefab);
+        currentWeapon = shotgunStrategy;
     }
 }

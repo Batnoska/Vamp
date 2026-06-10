@@ -17,7 +17,6 @@ public class AbilityInvoker : MonoBehaviour
     {
         if (!context.performed) return;
 
-        Debug.Log("Dash input");
         dashCommand.Execute();
     }
 }

@@ -3,14 +3,16 @@ using UnityEngine;
 public class ShotgunStrategy : IWeaponStrategy
 {
     private GameObject projectilePrefab;
+    private WeaponController owner;
 
     private int bulletCount = 3;
     private float spreadAngle = 25f;
     private float offset = 1f;
 
-    public ShotgunStrategy(GameObject prefab)
+    public ShotgunStrategy(GameObject prefab, WeaponController owner)
     {
         projectilePrefab = prefab;
+        this.owner = owner;
     }
 
     public void Attack(Transform origin)
@@ -36,7 +38,10 @@ public class ShotgunStrategy : IWeaponStrategy
             bullet.transform.position = spawnPosition;
             bullet.transform.rotation = rotation;
 
-            bullet.GetComponent<Projectile>()?.SetOrigin(projectilePrefab);
+            Projectile projectile = bullet.GetComponent<Projectile>();
+
+            projectile.SetOrigin(projectilePrefab);
+            projectile.SetFireEffect(owner.HasFireShot);
         }
     }
 }

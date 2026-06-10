@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a3db286934b45428f293b061407c1b, type: 3}
-  m_Name: N Heal Effect
-  m_EditorClassIdentifier: Assembly-CSharp::TypeObject.Normal.HealEffectSO
+  m_Script: {fileID: 11500000, guid: e2b2382a948134548951e4b32e08a67a, type: 3}
+  m_Name: N Fire Shot Effect
+  m_EditorClassIdentifier: Assembly-CSharp::TypeObject.Normal.FireShotEffectSO
