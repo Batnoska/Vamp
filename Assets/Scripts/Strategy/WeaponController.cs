@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,11 +19,18 @@ public class WeaponController : MonoBehaviour
     KnifeStrategy knifeStrategy;
     ShotgunStrategy shotgunStrategy;
 
-    public bool HasFireShot { get; private set; }
+    private List<Func<IHitEffect, IHitEffect>> hitDecorators = new();
 
-    public void EnableFireShot()
+    public IReadOnlyList<Func<IHitEffect, IHitEffect>> HitDecorators => hitDecorators;
+
+    public void AddDecorator(Func<IHitEffect, IHitEffect> decorator)
     {
-        HasFireShot = true;
+        hitDecorators.Add(decorator);
+    }
+
+    public void RemoveDecorator(Func<IHitEffect, IHitEffect> decorator)
+    {
+        hitDecorators.Remove(decorator);
     }
 
     void Start()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -13,20 +14,22 @@ public class Projectile : MonoBehaviour
 
     private HitData hitData;
 
-    private bool hasFireEffect;
-
     private GameObject originPrefab;
+
+    private bool returnedToPool;
+
+    private List<Func<IHitEffect, IHitEffect>> decorators;
+
+    public void SetDecorators(IReadOnlyList<Func<IHitEffect, IHitEffect>> _decorators)
+    {
+        this.decorators = new List<Func<IHitEffect, IHitEffect>>(_decorators);
+    }
 
     private void Awake()
     {
         hitData = new HitData(damage, knockbackForce);
     }
-
-
-    public void SetFireEffect(bool value)
-    {
-        hasFireEffect = value;
-    }
+    
 
     public void SetOrigin(GameObject prefab)
     {
@@ -35,6 +38,8 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
+        returnedToPool = false;
+        
         Invoke(nameof(ReturnToPool), lifetime);
     }
 
@@ -62,7 +67,10 @@ public class Projectile : MonoBehaviour
         {
             IHitEffect hitEffect = new BasicHitEffect(hitData);
 
-            if (hasFireEffect) hitEffect = new FireDecorator(hitEffect);
+            foreach (var decorator in decorators)
+            {
+                hitEffect = decorator(hitEffect);
+            }
 
             hitEffect.Apply(enemy, context);
             
@@ -72,6 +80,10 @@ public class Projectile : MonoBehaviour
 
     void ReturnToPool()
     {
+        if (returnedToPool) return;
+
+        returnedToPool = true;
+        
         PoolManage.Instance.Release(gameObject, originPrefab);
     }
 }

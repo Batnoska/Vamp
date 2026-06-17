@@ -14,7 +14,7 @@ namespace TypeObject.Normal
             if (weaponController == null)
                 return;
 
-            weaponController.EnableFireShot();
+            weaponController.AddDecorator(hit => new FireDecorator(hit));
         }
     }
 }
