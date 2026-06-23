@@ -41,7 +41,7 @@ public class ShotgunStrategy : IWeaponStrategy
             Projectile projectile = bullet.GetComponent<Projectile>();
 
             projectile.SetOrigin(projectilePrefab);
-            projectile.SetDecorators(owner.HitDecorators);
+            projectile.SetDecorators(owner.hitDecorators);
         }
     }
 }

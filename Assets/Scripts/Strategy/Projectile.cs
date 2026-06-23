@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
 
     private List<Func<IHitEffect, IHitEffect>> decorators;
 
-    public void SetDecorators(IReadOnlyList<Func<IHitEffect, IHitEffect>> _decorators)
+    public void SetDecorators(List<Func<IHitEffect, IHitEffect>> _decorators)
     {
         this.decorators = new List<Func<IHitEffect, IHitEffect>>(_decorators);
     }

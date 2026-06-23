@@ -61,6 +61,10 @@ public class GameTimer : MonoBehaviour
 
             enemySpawner.gameObject.SetActive(false);
 
+            GameScoreTracker score = FindFirstObjectByType<GameScoreTracker>();
+            
+            HighScoreManager.Instance.AddScore(score.CurrentScore);
+
             SceneManager.LoadScene("Victory");
         }
     }

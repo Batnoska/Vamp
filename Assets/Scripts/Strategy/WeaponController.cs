@@ -19,9 +19,9 @@ public class WeaponController : MonoBehaviour
     KnifeStrategy knifeStrategy;
     ShotgunStrategy shotgunStrategy;
 
-    private List<Func<IHitEffect, IHitEffect>> hitDecorators = new();
+    public List<Func<IHitEffect, IHitEffect>> hitDecorators = new();
 
-    public IReadOnlyList<Func<IHitEffect, IHitEffect>> HitDecorators => hitDecorators;
+    // public IReadOnlyList<Func<IHitEffect, IHitEffect>> HitDecorators => hitDecorators;
 
     public void AddDecorator(Func<IHitEffect, IHitEffect> decorator)
     {

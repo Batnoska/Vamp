@@ -32,6 +32,10 @@ public class DeadState : IPlayerState
 
         if (timer <= 0)
         {
+            GameScoreTracker score = Object.FindFirstObjectByType<GameScoreTracker>();
+            
+            HighScoreManager.Instance.AddScore(score.CurrentScore);
+            
             SceneManager.LoadScene("GameOver");
         }
     }

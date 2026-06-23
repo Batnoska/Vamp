@@ -3,8 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private PlayerNameUI playerName;
+    
     public void Play()
     {
+        playerName.SavePlayerName();
+        
         SceneManager.LoadScene("Gameplay");
     }
 
