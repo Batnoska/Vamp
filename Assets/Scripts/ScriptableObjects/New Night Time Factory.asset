@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9eb9acfddfce9d45af6e67a427502c3, type: 3}
   m_Name: New Night Time Factory
   m_EditorClassIdentifier: Assembly-CSharp::NightTimeFactory
-  goblinPrefab: {fileID: 6548085715536200291, guid: 78e52d87c22dbd04b8b11ccacd6dbdde, type: 3}
-  orcPrefab: {fileID: 5142203937328492303, guid: fc7126fd88f8a6a49963b87df9b510ab, type: 3}
-  skeletonPrefab: {fileID: 25406279950501592, guid: 6266d854c8225db4fa2607705b911d2b, type: 3}
+  goblinPrefab: {fileID: 6548085715536200291, guid: bf075181e4e15f840997b40f409de83c, type: 3}
+  orcPrefab: {fileID: 5142203937328492303, guid: ca3da2add4fc58a4f84d15ee8eaee3a5, type: 3}
+  skeletonPrefab: {fileID: 25406279950501592, guid: f16fdfd23a2ce2f469f8f737bf03fce7, type: 3}
