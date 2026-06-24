@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aac76184ff1d9cf4c8e612e7d099c7f8, type: 3}
-  m_Name: Fire Shot Enable
+  m_Name: Ice Shot
   m_EditorClassIdentifier: Assembly-CSharp::TypeObject.Normal.ConsumableItemSO
-  <Name>k__BackingField: Fire
+  <Name>k__BackingField: Ice
   <Price>k__BackingField: 0
   <Rarity>k__BackingField: 0
   <Sprite>k__BackingField: {fileID: 0}
@@ -20,4 +20,4 @@ MonoBehaviour:
   - <Data>k__BackingField:
       <Value>k__BackingField: 0
       <ValueIsPercentage>k__BackingField: 0
-    <Effect>k__BackingField: {fileID: 11400000, guid: ab443e42b8f77fa4d8be42ee63ee2bce, type: 2}
+    <Effect>k__BackingField: {fileID: 11400000, guid: 6ad28d3cda1265a428cdf430b0b56722, type: 2}

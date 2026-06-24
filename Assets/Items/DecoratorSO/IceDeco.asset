@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b2382a948134548951e4b32e08a67a, type: 3}
-  m_Name: N Fire Shot Effect
-  m_EditorClassIdentifier: Assembly-CSharp::TypeObject.Normal.FireShotEffectSO
+  m_Script: {fileID: 11500000, guid: 16eb1841392fa5d4ab00514d87087b30, type: 3}
+  m_Name: IceDeco
+  m_EditorClassIdentifier: Assembly-CSharp::DecoratorShotEffectSo
+  decorator: {fileID: 11400000, guid: 55fc2f990a453f24a9f204144b2a2b99, type: 2}

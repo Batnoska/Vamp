@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
+using WaitForSeconds = UnityEngine.WaitForSeconds;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,12 +12,39 @@ public class Enemy : MonoBehaviour
     
     public float CurrentHealth { get; private set; }
 
+    private float baseSpeed;
+
     private Transform player;
     private Rigidbody2D rb;
 
     private float knockbackTimer;
 
     private GameObject originalPrefab;
+
+    private Coroutine slowRoutine;
+
+    private void Awake()
+    {
+        baseSpeed = _speed;
+    }
+
+    public void ApplySlow(float multiplier, float duration)
+    {
+        if (!gameObject.activeInHierarchy) return;
+        
+        if (slowRoutine != null) StopCoroutine(slowRoutine);
+
+        slowRoutine = StartCoroutine(SlowRoutine(multiplier, duration));
+    }
+
+    IEnumerator SlowRoutine(float multiplier, float duration)
+    {
+        _speed = baseSpeed * multiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        _speed = baseSpeed;
+    }
 
     public void SetOrigin(GameObject prefab)
     {
@@ -25,6 +54,8 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         CurrentHealth = _health;
+
+        _speed = baseSpeed;
 
         knockbackTimer = 0f;
 

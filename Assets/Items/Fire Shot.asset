@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aac76184ff1d9cf4c8e612e7d099c7f8, type: 3}
-  m_Name: N Consumable Item
+  m_Name: Fire Shot
   m_EditorClassIdentifier: Assembly-CSharp::TypeObject.Normal.ConsumableItemSO
-  <Name>k__BackingField: Healing
+  <Name>k__BackingField: Fire
   <Price>k__BackingField: 0
   <Rarity>k__BackingField: 0
   <Sprite>k__BackingField: {fileID: 0}
   effects:
   - <Data>k__BackingField:
-      <Value>k__BackingField: 4
+      <Value>k__BackingField: 0
       <ValueIsPercentage>k__BackingField: 0
-    <Effect>k__BackingField: {fileID: 11400000, guid: 3be34a0912147364fad4c9eeeaef21ca, type: 2}
+    <Effect>k__BackingField: {fileID: 11400000, guid: 8ee3b4c6c2709e542a254ff050c5fa67, type: 2}
