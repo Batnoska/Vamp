@@ -8,10 +8,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] public float _health;
     
-    private IObjectPool<GameObject> pool;
+    public float CurrentHealth { get; private set; }
 
     private Transform player;
-
     private Rigidbody2D rb;
 
     private float knockbackTimer;
@@ -23,16 +22,20 @@ public class Enemy : MonoBehaviour
         originalPrefab = prefab;
     }
 
-    public void SetPool(IObjectPool<GameObject> pool)
+    private void OnEnable()
     {
-        this.pool = pool;
+        CurrentHealth = _health;
+
+        knockbackTimer = 0f;
+
+        if (rb != null) rb.linearVelocity = Vector2.zero;
     }
 
     public void ReturnToPool()
     {
         PoolManage.Instance.Release(gameObject, originalPrefab);
     }
-    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +51,8 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction =
+            (player.position - transform.position).normalized;
 
         rb.linearVelocity = direction * _speed;
     }
@@ -63,15 +67,18 @@ public class Enemy : MonoBehaviour
         return _damage;
     }
 
-    public void SetStats(float speed, float damage, float health)
-    {
-        this._speed = speed;
-        this._damage = damage;
-        this._health = health;
-    }
-
     public void SetTarget(Transform target)
     {
         player = target;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth -= damage;
+    }
+
+    public bool IsDead()
+    {
+        return CurrentHealth <= 0;
     }
 }

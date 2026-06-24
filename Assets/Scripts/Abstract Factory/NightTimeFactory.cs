@@ -3,54 +3,42 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Factories/Enemies/NightFactory")]
 public class NightTimeFactory : EnemyFactorySO
 {
-    public override GameObject CreateGoblin()
+    public override GameObject SpawnGoblin()
     {
-        GameObject enemy = Instantiate(goblinPrefab);
+        GameObject enemy =
+            PoolManage.Instance.Get(goblinPrefab);
 
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
+        Enemy e =
+            enemy.GetComponent<Enemy>();
 
-        enemyComponent.SetStats(speed: 3.5f, damage: 6f, health: 5f);
+        e.SetOrigin(goblinPrefab);
 
         return enemy;
     }
-    
-    public override void ConfigureGoblin(GameObject enemy)
+
+    public override GameObject SpawnOrc()
     {
-        Enemy e = enemy.GetComponent<Enemy>();
-        e.SetStats(3.5f, 6f, 5f);
-    }
+        GameObject enemy =
+            PoolManage.Instance.Get(orcPrefab);
 
-    public override GameObject CreateOrc()
-    {
-        GameObject enemy = Instantiate(orcPrefab);
+        Enemy e =
+            enemy.GetComponent<Enemy>();
 
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
-
-        enemyComponent.SetStats(speed: 2.2f, damage: 8f, health: 9f);
+        e.SetOrigin(orcPrefab);
 
         return enemy;
     }
-    
-    public override void ConfigureOrc(GameObject enemy)
+
+    public override GameObject SpawnSkeleton()
     {
-        Enemy e = enemy.GetComponent<Enemy>();
-        e.SetStats(2.2f, 8f, 9f);
-    }
+        GameObject enemy =
+            PoolManage.Instance.Get(skeletonPrefab);
 
-    public override GameObject CreateSkeleton()
-    {
-        GameObject enemy = Instantiate(skeletonPrefab);
+        Enemy e =
+            enemy.GetComponent<Enemy>();
 
-        Enemy enemyComponent = enemy.GetComponent<Enemy>();
-
-        enemyComponent.SetStats(speed: 4f, damage: 4f, health: 3f);
+        e.SetOrigin(skeletonPrefab);
 
         return enemy;
-    }
-    
-    public override void ConfigureSkeleton(GameObject enemy)
-    {
-        Enemy e = enemy.GetComponent<Enemy>();
-        e.SetStats(4f, 4f, 3f);
     }
 }
