@@ -51,11 +51,11 @@ public class DashState : IPlayerState
 
             if (player.movement.IsMoving)
             {
-                player.ChangeState(new MoveState());
+                player.ChangeState(player.moveState);
             }
             else
             {
-                player.ChangeState(new IdleState());
+                player.ChangeState(player.idleState);
             }
         }
     }

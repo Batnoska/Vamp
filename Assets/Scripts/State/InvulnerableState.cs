@@ -46,9 +46,9 @@ public class InvulnerableState : IPlayerState
 
         if (timer <= 0)
         {
-            if (player.movement.IsMoving) player.ChangeState(new MoveState());
+            if (player.movement.IsMoving) player.ChangeState(player.moveState);
             else
-                player.ChangeState(new IdleState());
+                player.ChangeState(player.idleState);
         }
     }
 
