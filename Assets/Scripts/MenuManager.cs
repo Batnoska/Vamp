@@ -17,6 +17,11 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
+
     public void BackToMenu()
     {
         SceneManager.LoadScene("MainMenu");

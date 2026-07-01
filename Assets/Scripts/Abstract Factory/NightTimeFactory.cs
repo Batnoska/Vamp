@@ -21,10 +21,7 @@ public class NightTimeFactory : EnemyFactorySO
         GameObject enemy =
             PoolManage.Instance.Get(orcPrefab);
 
-        Enemy e =
-            enemy.GetComponent<Enemy>();
-
-        e.SetOrigin(orcPrefab);
+        enemy.GetComponent<Enemy>().SetOrigin(orcPrefab);
 
         return enemy;
     }

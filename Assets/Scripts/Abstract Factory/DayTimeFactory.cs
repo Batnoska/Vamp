@@ -19,8 +19,7 @@ public class DayTimeFactory : EnemyFactorySO
         GameObject enemy =
             PoolManage.Instance.Get(orcPrefab);
 
-        enemy.GetComponent<Enemy>()
-            .SetOrigin(orcPrefab);
+        enemy.GetComponent<Enemy>().SetOrigin(orcPrefab);
 
         return enemy;
     }
