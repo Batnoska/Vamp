@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class HighScoreManager : MonoBehaviour
 {
     public static HighScoreManager Instance;
 
-    public List<ScoreEntry> Scores = new List<ScoreEntry>();
+    public ScoreSaveData Data;
     
     private const int MAX_SCORES = 10;
+
+    private string SavePath => Path.Combine(Application.persistentDataPath, "highscores.json");
 
     private void Awake()
     {
@@ -25,24 +28,27 @@ public class HighScoreManager : MonoBehaviour
         LoadScores();
     }
 
+    public void SetPlayerName(string playerName)
+    {
+        Data.playerName = playerName;
+        
+        SaveScores();
+    }
+
+    public string GetPlayerName()
+    {
+        return Data.playerName;
+    }
+
     public void AddScore(int score)
     {
-        string playerName =
-            PlayerPrefs.GetString(
-                "PLAYER_NAME",
-                "Unknown");
+        Data.scores.Add(new ScoreEntry(Data.playerName, score));
 
-        Scores.Add(
-            new ScoreEntry(playerName, score));
+        Data.scores.Sort((a, b) => b.score.CompareTo(a.score));
 
-        Scores.Sort(
-            (a, b) => b.score.CompareTo(a.score));
-
-        if (Scores.Count > MAX_SCORES)
+        if (Data.scores.Count > MAX_SCORES)
         {
-            Scores.RemoveRange(
-                MAX_SCORES,
-                Scores.Count - MAX_SCORES);
+            Data.scores.RemoveRange(MAX_SCORES, Data.scores.Count - MAX_SCORES);
         }
 
         SaveScores();
@@ -50,47 +56,24 @@ public class HighScoreManager : MonoBehaviour
 
     void SaveScores()
     {
-        PlayerPrefs.SetInt(
-            "ScoreCount",
-            Scores.Count);
-
-        for (int i = 0; i < Scores.Count; i++)
-        {
-            PlayerPrefs.SetString(
-                $"PlayerName_{i}",
-                Scores[i].playerName);
-
-            PlayerPrefs.SetInt(
-                $"PlayerScore_{i}",
-                Scores[i].score);
-        }
-
-        PlayerPrefs.Save();
+        string json = JsonUtility.ToJson(Data, true);
+        
+        File.WriteAllText(SavePath, json);
     }
 
     void LoadScores()
     {
-        Scores.Clear();
-
-        int count =
-            PlayerPrefs.GetInt(
-                "ScoreCount",
-                0);
-
-        for (int i = 0; i < count; i++)
+        if (File.Exists(SavePath))
         {
-            string playerName =
-                PlayerPrefs.GetString(
-                    $"PlayerName_{i}");
+            string json = File.ReadAllText(SavePath);
 
-            int score =
-                PlayerPrefs.GetInt(
-                    $"PlayerScore_{i}");
-
-            Scores.Add(
-                new ScoreEntry(
-                    playerName,
-                    score));
+            Data = JsonUtility.FromJson<ScoreSaveData>(json);
+        }
+        else
+        {
+            Data = new ScoreSaveData();
+            
+            SaveScores();
         }
     }
 }

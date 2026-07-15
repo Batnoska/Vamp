@@ -6,10 +6,14 @@ public class FireDecorator : HitDecorator
 
     private int splashDamage = 1;
 
+    private GameObject explosionPrefab;
+
     public FireDecorator(
-        IHitEffect effect)
+        IHitEffect effect,
+        GameObject explosionPrefab)
         : base(effect)
     {
+        this.explosionPrefab = explosionPrefab;
     }
 
     public override void Apply(
@@ -17,6 +21,8 @@ public class FireDecorator : HitDecorator
         HitContext context)
     {
         base.Apply(enemy, context);
+
+        SpawnExplosionEffect(enemy.transform.position);
 
         Collider2D[] hits =
             Physics2D.OverlapCircleAll(
@@ -43,5 +49,29 @@ public class FireDecorator : HitDecorator
                 splashHit,
                 context);
         }
+    }
+
+    private void SpawnExplosionEffect(Vector2 position)
+    {
+        if (explosionPrefab == null) return;
+
+        GameObject explosion =
+            Object.Instantiate(explosionPrefab, position, Quaternion.identity);
+
+        ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
+
+        float destroyDelay = 1f;
+
+        if (ps != null)
+        {
+            ParticleSystem.ShapeModule shape = ps.shape;
+            shape.radius = splashRadius;
+
+            ps.Play();
+
+            destroyDelay = ps.main.duration + ps.main.startLifetime.constantMax;
+        }
+
+        Object.Destroy(explosion, destroyDelay);
     }
 }

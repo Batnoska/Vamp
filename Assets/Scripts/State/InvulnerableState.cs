@@ -21,6 +21,8 @@ public class InvulnerableState : IPlayerState
     public void Enter(PlayerStateMachine player)
     {
         this.player = player;
+        
+        player.GetComponent<PlayerAnimator>().PlayHurt();
 
         spriteRenderer =
             player.GetComponent<SpriteRenderer>();

@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _damage;
     [SerializeField] public float _health;
+
+    private SpriteRenderer spriteRenderer;
     
     public float CurrentHealth { get; private set; }
 
@@ -69,6 +71,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -85,7 +88,16 @@ public class Enemy : MonoBehaviour
         Vector2 direction =
             (player.position - transform.position).normalized;
 
+        HandleFlip(direction);
+
         rb.linearVelocity = direction * _speed;
+    }
+
+    private void HandleFlip(Vector2 direction)
+    {
+        if (direction.x == 0) return;
+
+        spriteRenderer.flipX = direction.x < 0;
     }
 
     public void ApplyKnockbackStun(float duration)

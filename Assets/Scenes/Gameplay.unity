@@ -1828,7 +1828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2010ee0d59de1846a7f14b2d4c59b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  currentFactory: {fileID: 11400000, guid: 09ef76a221136514e82b9d7f0ff4368e, type: 2}
+  currentFactory: {fileID: 11400000, guid: dfc5e3eca0c2bc645b0149fbd0b32213, type: 2}
   enemyDeathChannel: {fileID: 11400000, guid: 7de7e916282305c4da8e205c721234db, type: 2}
   player: {fileID: 878428660}
   spawnInterval: 2
@@ -6199,6 +6199,8 @@ GameObject:
   m_Component:
   - component: {fileID: 878428660}
   - component: {fileID: 878428659}
+  - component: {fileID: 878428669}
+  - component: {fileID: 878428670}
   - component: {fileID: 878428657}
   - component: {fileID: 878428663}
   - component: {fileID: 878428662}
@@ -6250,17 +6252,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.23988998, y: -0.3541236}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 7.142857, y: 3.9285715}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.47978, y: 2.8048873}
   m_EdgeRadius: 0
 --- !u!114 &878428658
 MonoBehaviour:
@@ -6326,7 +6328,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6480,8 +6482,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 878428658}
-        m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+      - m_Target: {fileID: 878428667}
+        m_TargetAssemblyTypeName: AbilityInvoker, Assembly-CSharp
         m_MethodName: OnSwitchWeapon1
         m_Mode: 0
         m_Arguments:
@@ -6496,8 +6498,8 @@ MonoBehaviour:
     m_ActionName: 'Player/SwitchWeapon1[/Keyboard/1]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 878428658}
-        m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+      - m_Target: {fileID: 878428667}
+        m_TargetAssemblyTypeName: AbilityInvoker, Assembly-CSharp
         m_MethodName: OnSwitchWeapon2
         m_Mode: 0
         m_Arguments:
@@ -6527,7 +6529,7 @@ MonoBehaviour:
     m_ActionId: 1347b9ba-9c8d-4623-bf86-e3a68c0095f6
     m_ActionName: 'Player/Dash[/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -6610,7 +6612,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0341c1700eb86c4ab1fb6615d209614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityInvoker
+  maxQueuedCommands: 3
+  playerStateMachine: {fileID: 878428664}
   abilities: {fileID: 878428668}
+  weaponController: {fileID: 878428658}
 --- !u!114 &878428668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6626,6 +6631,40 @@ MonoBehaviour:
   dashForce: 15
   dashDuration: 0.2
   dashCooldown: 1
+--- !u!95 &878428669
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878428656}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2a5b7097b0fe44394328c0bdb9252e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &878428670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878428656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efb3ffff04838248ae131b090f3e824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &879285301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5570425397214530123, guid: 9c54cc568ea3f8e4fa517166e738f525, type: 3}
@@ -9422,8 +9461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightManager
   spawner: {fileID: 236205272}
-  dayFactory: {fileID: 11400000, guid: 09ef76a221136514e82b9d7f0ff4368e, type: 2}
-  nightFactory: {fileID: 11400000, guid: 05e213e819d2eed4e92bcefd2cd5150c, type: 2}
+  dayFactory: {fileID: 11400000, guid: dfc5e3eca0c2bc645b0149fbd0b32213, type: 2}
+  nightFactory: {fileID: 11400000, guid: 0bfc4b19f0d810c4e82b299036505646, type: 2}
 --- !u!4 &1435981748
 Transform:
   m_ObjectHideFlags: 0

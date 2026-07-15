@@ -48,6 +48,8 @@ public class WeaponController : MonoBehaviour
             attackTimer = 0f;
 
             IsAttacking = true;
+            
+            GetComponent<PlayerAnimator>().PlayAttack();
 
             currentWeapon?.Attack(transform);
             
@@ -60,18 +62,17 @@ public class WeaponController : MonoBehaviour
         IsAttacking = false;
     }
 
-    public void OnSwitchWeapon1(InputAction.CallbackContext context)
+    public void Equip(int weaponIndex)
     {
-        if (!context.performed) return;
-
-        EquipKnife();
-    }
-
-    public void OnSwitchWeapon2(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-
-        EquipWeapon();
+        switch (weaponIndex)
+        {
+            case 0:
+                EquipKnife();
+                break;
+            case 1:
+                EquipWeapon();
+                break;
+        }
     }
 
     public void EquipKnife()

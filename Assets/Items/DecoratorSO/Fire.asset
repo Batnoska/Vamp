@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d1eab8ff0af6d419a1ca4fba67305b, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: Assembly-CSharp::FireDecoratorSO
+  explosionPrefab: {fileID: 8214886068475277729, guid: 4d54e6642b240d14a9cbe81a60f427b1, type: 3}

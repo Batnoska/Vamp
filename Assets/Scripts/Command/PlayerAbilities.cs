@@ -13,6 +13,8 @@ public class PlayerAbilities : MonoBehaviour
 
     private bool canDash = true;
 
+    public bool CanDash => canDash;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

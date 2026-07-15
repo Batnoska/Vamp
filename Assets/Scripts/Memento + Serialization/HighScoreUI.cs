@@ -8,7 +8,7 @@ public class HighScoreUI : MonoBehaviour
 
     private void Start()
     {
-        var scores = HighScoreManager.Instance.Scores;
+        var scores = HighScoreManager.Instance.Data.scores;
 
         for (int i = 0; i < scoreTexts.Length; i++)
         {

@@ -6,10 +6,14 @@ public class IceDecorator : HitDecorator
 
     private float slowDuration = 1f;
 
+    private GameObject iceParticlesPrefab;
+
     public IceDecorator(
-        IHitEffect effect)
+        IHitEffect effect,
+        GameObject iceParticlesPrefab)
         : base(effect)
     {
+        this.iceParticlesPrefab = iceParticlesPrefab;
     }
 
     public override void Apply(
@@ -27,5 +31,17 @@ public class IceDecorator : HitDecorator
         e.ApplySlow(
             slowMultiplier,
             slowDuration);
+
+        SpawnIceEffect(e.transform);
+    }
+
+    private void SpawnIceEffect(Transform target)
+    {
+        if (iceParticlesPrefab == null) return;
+
+        GameObject iceEffect =
+            Object.Instantiate(iceParticlesPrefab, target.position, Quaternion.identity, target);
+
+        Object.Destroy(iceEffect, slowDuration);
     }
 }

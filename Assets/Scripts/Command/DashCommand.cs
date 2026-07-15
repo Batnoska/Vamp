@@ -9,8 +9,15 @@ public class DashCommand : ICommand
         this.abilities = abilities;
     }
 
+    public bool CanExecute()
+    {
+        return abilities.CanDash;
+    }
+
     public void Execute()
     {
+        Debug.Log("[Command] DashCommand");
+
         abilities.Dash();
     }
 }

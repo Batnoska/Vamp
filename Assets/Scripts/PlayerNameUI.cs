@@ -14,6 +14,6 @@ public class PlayerNameUI : MonoBehaviour
             playerName = "Unknown";
         }
         
-        PlayerPrefs.SetString("PLAYER_NAME", playerName);
+        HighScoreManager.Instance.SetPlayerName(playerName);
     }
 }
