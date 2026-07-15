@@ -21,6 +21,8 @@ public class InvulnerableState : IPlayerState
     public void Enter(PlayerStateMachine player)
     {
         this.player = player;
+        
+        player.GetComponent<PlayerAnimator>().PlayHurt();
 
         spriteRenderer =
             player.GetComponent<SpriteRenderer>();
@@ -46,9 +48,9 @@ public class InvulnerableState : IPlayerState
 
         if (timer <= 0)
         {
-            if (player.movement.IsMoving) player.ChangeState(new MoveState());
+            if (player.movement.IsMoving) player.ChangeState(player.moveState);
             else
-                player.ChangeState(new IdleState());
+                player.ChangeState(player.idleState);
         }
     }
 

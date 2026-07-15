@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -15,10 +16,20 @@ public class Projectile : MonoBehaviour
 
     private GameObject originPrefab;
 
+    private bool returnedToPool;
+
+    private List<Func<IHitEffect, IHitEffect>> decorators;
+
+    public void SetDecorators(List<Func<IHitEffect, IHitEffect>> _decorators)
+    {
+        this.decorators = new List<Func<IHitEffect, IHitEffect>>(_decorators);
+    }
+
     private void Awake()
     {
         hitData = new HitData(damage, knockbackForce);
     }
+    
 
     public void SetOrigin(GameObject prefab)
     {
@@ -27,6 +38,8 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
+        returnedToPool = false;
+        
         Invoke(nameof(ReturnToPool), lifetime);
     }
 
@@ -52,14 +65,25 @@ public class Projectile : MonoBehaviour
         
         if (enemy.isAlive)
         {
-            enemy.TakeDamage(hitData, context);
+            IHitEffect hitEffect = new BasicHitEffect(hitData);
 
+            foreach (var decorator in decorators)
+            {
+                hitEffect = decorator(hitEffect);
+            }
+
+            hitEffect.Apply(enemy, context);
+            
             ReturnToPool();
         }
     }
 
     void ReturnToPool()
     {
+        if (returnedToPool) return;
+
+        returnedToPool = true;
+        
         PoolManage.Instance.Release(gameObject, originPrefab);
     }
 }

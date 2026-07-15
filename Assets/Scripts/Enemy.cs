@@ -1,40 +1,77 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
+using WaitForSeconds = UnityEngine.WaitForSeconds;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _damage;
     [SerializeField] public float _health;
+
+    private SpriteRenderer spriteRenderer;
     
-    private IObjectPool<GameObject> pool;
+    public float CurrentHealth { get; private set; }
+
+    private float baseSpeed;
 
     private Transform player;
-
     private Rigidbody2D rb;
 
     private float knockbackTimer;
 
     private GameObject originalPrefab;
 
+    private Coroutine slowRoutine;
+
+    private void Awake()
+    {
+        baseSpeed = _speed;
+    }
+
+    public void ApplySlow(float multiplier, float duration)
+    {
+        if (!gameObject.activeInHierarchy) return;
+        
+        if (slowRoutine != null) StopCoroutine(slowRoutine);
+
+        slowRoutine = StartCoroutine(SlowRoutine(multiplier, duration));
+    }
+
+    IEnumerator SlowRoutine(float multiplier, float duration)
+    {
+        _speed = baseSpeed * multiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        _speed = baseSpeed;
+    }
+
     public void SetOrigin(GameObject prefab)
     {
         originalPrefab = prefab;
     }
 
-    public void SetPool(IObjectPool<GameObject> pool)
+    private void OnEnable()
     {
-        this.pool = pool;
+        CurrentHealth = _health;
+
+        _speed = baseSpeed;
+
+        knockbackTimer = 0f;
+
+        if (rb != null) rb.linearVelocity = Vector2.zero;
     }
 
     public void ReturnToPool()
     {
         PoolManage.Instance.Release(gameObject, originalPrefab);
     }
-    
+
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -48,9 +85,19 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction =
+            (player.position - transform.position).normalized;
+
+        HandleFlip(direction);
 
         rb.linearVelocity = direction * _speed;
+    }
+
+    private void HandleFlip(Vector2 direction)
+    {
+        if (direction.x == 0) return;
+
+        spriteRenderer.flipX = direction.x < 0;
     }
 
     public void ApplyKnockbackStun(float duration)
@@ -63,15 +110,18 @@ public class Enemy : MonoBehaviour
         return _damage;
     }
 
-    public void SetStats(float speed, float damage, float health)
-    {
-        this._speed = speed;
-        this._damage = damage;
-        this._health = health;
-    }
-
     public void SetTarget(Transform target)
     {
         player = target;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth -= damage;
+    }
+
+    public bool IsDead()
+    {
+        return CurrentHealth <= 0;
     }
 }

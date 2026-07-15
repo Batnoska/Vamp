@@ -37,38 +37,22 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if (currentEnemies >= maxEnemies) return;
-        
-        int random = Random.Range(0, 3);
+        if (currentEnemies >= maxEnemies)
+            return;
 
-        GameObject prefab;
-        GameObject enemy;
-
-        switch (random)
+        GameObject enemy = Random.Range(0, 3) switch
         {
-            case 0:
-                prefab = currentFactory.GetGoblinPrefab();
-                enemy = PoolManage.Instance.Get(prefab);
-                currentFactory.ConfigureGoblin(enemy);
-                break;
-            case 1:
-                prefab = currentFactory.GetOrcPrefab();
-                enemy = PoolManage.Instance.Get(prefab);
-                currentFactory.ConfigureOrc(enemy);
-                break;
+            0 => currentFactory.SpawnGoblin(),
+            1 => currentFactory.SpawnOrc(),
+            _ => currentFactory.SpawnSkeleton()
+        };
 
-            default:
-                prefab = currentFactory.GetSkeletonPrefab();
-                enemy = PoolManage.Instance.Get(prefab);
-                currentFactory.ConfigureSkeleton(enemy);
-                break;
-        }
+        enemy.transform.position =
+            GetSpawnPosition();
 
-        enemy.transform.position = GetSpawnPosition();
+        enemy.GetComponent<Enemy>()
+            .SetTarget(player);
 
-        Enemy e = enemy.GetComponent<Enemy>();
-        e.SetTarget(player);
-        e.SetOrigin(prefab);
         currentEnemies++;
     }
     

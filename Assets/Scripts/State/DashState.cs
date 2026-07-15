@@ -28,6 +28,8 @@ public class DashState : IPlayerState
     public void Enter(PlayerStateMachine player)
     {
         this.player = player;
+        
+        player.GetComponent<PlayerAnimator>().PlayRoll();
 
         rb = player.GetComponent<Rigidbody2D>();
 
@@ -47,15 +49,13 @@ public class DashState : IPlayerState
         {
             rb.linearVelocity = Vector2.zero;
 
-            player.movement.CanMove = true;
-
             if (player.movement.IsMoving)
             {
-                player.ChangeState(new MoveState());
+                player.ChangeState(player.moveState);
             }
             else
             {
-                player.ChangeState(new IdleState());
+                player.ChangeState(player.idleState);
             }
         }
     }
@@ -63,5 +63,7 @@ public class DashState : IPlayerState
     public void Exit()
     {
         rb.linearVelocity = Vector2.zero;
+
+        player.movement.CanMove = true;
     }
 }

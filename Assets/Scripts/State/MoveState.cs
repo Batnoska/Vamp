@@ -9,6 +9,8 @@ public class MoveState : IPlayerState
     public void Enter(PlayerStateMachine player)
     {
         this.player = player;
+        
+        player.GetComponent<PlayerAnimator>().SetMoving(true);
     }
     
     public void Update() {}

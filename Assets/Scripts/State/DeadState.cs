@@ -10,6 +10,8 @@ public class DeadState : IPlayerState
     public void Enter(PlayerStateMachine player)
     {
         this.player = player;
+        
+        player.GetComponent<PlayerAnimator>().PlayDeath();
 
         timer = 1.5f;
 
@@ -20,8 +22,6 @@ public class DeadState : IPlayerState
         player.weaponController.enabled = false;
 
         player.GetComponent<PlayerHealth>().health = 0;
-
-        player.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public void Update()
@@ -32,6 +32,10 @@ public class DeadState : IPlayerState
 
         if (timer <= 0)
         {
+            GameScoreTracker score = Object.FindFirstObjectByType<GameScoreTracker>();
+            
+            HighScoreManager.Instance.AddScore(score.CurrentScore);
+            
             SceneManager.LoadScene("GameOver");
         }
     }

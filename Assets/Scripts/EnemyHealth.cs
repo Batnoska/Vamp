@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
 
     public bool IsDead()
     {
-        return enemy._health <= 0;
+        return enemy.IsDead();
     }
 
     public void SetDead()
@@ -41,6 +41,6 @@ public class EnemyHealth : MonoBehaviour
 
     public void ApplyDamage(HitData hit)
     {
-        enemy._health -= hit.damage;
+        enemy.TakeDamage(hit.damage);
     }
 }

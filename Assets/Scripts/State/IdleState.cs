@@ -9,6 +9,7 @@ public class IdleState : IPlayerState
     {
         this.player = player;
         
+        player.GetComponent<PlayerAnimator>().SetMoving(false);
 
         player.movement.StopMovement();
     }

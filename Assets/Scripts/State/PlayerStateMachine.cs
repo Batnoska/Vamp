@@ -9,9 +9,12 @@ public class PlayerStateMachine : MonoBehaviour
 
     public WeaponController weaponController;
 
+    public MoveState moveState = new();
+    public IdleState idleState = new();
+
     public void ChangeState(IPlayerState newState)
     {
-        Debug.Log("Changing state to: " + newState.GetType().Name);
+        // Debug.Log("Changing state to: " + newState.GetType().Name);
         
         currentState?.Exit();
 
@@ -38,10 +41,10 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (movement.IsMoving && !(currentState is MoveState))
         {
-            ChangeState(new MoveState());
+            ChangeState(moveState);
         } else if (!movement.IsMoving && !(currentState is IdleState))
         {
-            ChangeState(new IdleState());
+            ChangeState(idleState);
         }
     }
 }

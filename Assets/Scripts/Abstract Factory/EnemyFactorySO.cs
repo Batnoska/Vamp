@@ -1,25 +1,34 @@
 using UnityEngine;
 
-public abstract class EnemyFactorySO : ScriptableObject
+
+[CreateAssetMenu(menuName = "Factories/Enemies/EnemyFactory")]
+public class EnemyFactorySO : ScriptableObject
 {
     [SerializeField] protected GameObject goblinPrefab;
-
     [SerializeField] protected GameObject orcPrefab;
-
     [SerializeField] protected GameObject skeletonPrefab;
 
-    public GameObject GetGoblinPrefab() => goblinPrefab;
-    public GameObject GetOrcPrefab() => orcPrefab;
-    public GameObject GetSkeletonPrefab() => skeletonPrefab;
+    public GameObject SpawnGoblin()
+    {
+        return SpawnFromPrefab(goblinPrefab);
+    }
 
-    public abstract void ConfigureGoblin(GameObject enemy);
-    public abstract void ConfigureOrc(GameObject enemy);
-    public abstract void ConfigureSkeleton(GameObject enemy);
+    public GameObject SpawnOrc()
+    {
+        return SpawnFromPrefab(orcPrefab);
+    }
 
+    public GameObject SpawnSkeleton()
+    {
+        return SpawnFromPrefab(skeletonPrefab);
+    }
 
-    public abstract GameObject CreateGoblin();
+    private GameObject SpawnFromPrefab(GameObject prefab)
+    {
+        GameObject enemy = PoolManage.Instance.Get(prefab);
 
-    public abstract GameObject CreateOrc();
+        enemy.GetComponent<Enemy>().SetOrigin(prefab);
 
-    public abstract GameObject CreateSkeleton();
+        return enemy;
+    }
 }
